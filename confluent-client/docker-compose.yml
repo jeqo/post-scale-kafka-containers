@@ -1,0 +1,11 @@
+version: "2.1"
+services:
+  client:
+    image: jeqo/confluent-platform-kafka:3.1.1-2.11
+    command: sleep infinity
+    networks:
+      - default
+      - confluentcluster_default
+networks:
+  confluentcluster_default:
+    external: true
