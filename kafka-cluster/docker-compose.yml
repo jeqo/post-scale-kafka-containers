@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 services:
   kafka:
     image: jeqo/apache-kafka:0.10.1.0-2.11
