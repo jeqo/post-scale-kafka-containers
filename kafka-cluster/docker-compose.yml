@@ -1,0 +1,8 @@
+version: "2"
+services:
+  kafka:
+    image: jeqo/apache-kafka:0.10.1.0-2.11
+    links:
+      - zookeeper
+  zookeeper:
+    image: jeqo/apache-zookeeper:3.4.8
