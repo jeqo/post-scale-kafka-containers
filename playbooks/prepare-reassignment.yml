@@ -1,0 +1,44 @@
+- hosts: localhost
+  tasks:
+    - docker_container:
+        name: kafka-client
+        image: jeqo/apache-kafka-client:0.10.1.0-2.11
+        command: sleep infinity
+        networks:
+          - name: kafkacluster_default
+
+    - add_host:
+        name: kafka-client
+        groups: docker
+        ansible_connection: docker
+
+- hosts: kafka-client
+  connection: docker
+  gather_facts: false
+  vars:
+    topics:
+      - topic1
+    broker_list: 1003
+  tasks:
+    - template:
+        src: reassign-topics-request.json.j2
+        dest: ./reassign-topics.json
+
+    - shell: >
+        bin/kafka-reassign-partitions.sh
+        --zookeeper zookeeper:2181
+        --topics-to-move-json-file reassign-topics.json
+        --broker-list "{{ broker_list }}"
+        --generate
+      register: result
+
+    - debug:
+        var: result.stdout_lines
+
+
+- hosts: localhost
+  tasks:
+    - name: remove container
+      docker_container:
+        name: kafka-client
+        state: absent

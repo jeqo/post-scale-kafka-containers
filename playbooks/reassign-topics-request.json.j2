@@ -1,0 +1,10 @@
+{
+  "topics": [
+  {% for topic in topics %}
+    {
+      "topic": "{{ topic }}"
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}
+  ],
+  "version": 1
+ }
