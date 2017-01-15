@@ -1,4 +1,5 @@
 Post: Scale Kafka containers
 ============================
 
-//TODO: post in progress
+English: https://jeqo.github.io/post/2017-01-15-scale-kafka-containers/
+Español: https://jeqo.github.io/es/post/2017-01-15-scale-kafka-containers/
